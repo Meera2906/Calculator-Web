@@ -128,7 +128,7 @@ Calculator/
 Have a suggestion? Want to remix the concept?  
 I’d love to hear from you.
 
-📧 **[meerafareena2905.email@.com](mailto:your.email@example.com)**  
+📧 **[meerafareena2905.gmail@.com](mailto:your.email@example.com)**  
 💬 Or open an [issue](https://github.com/Meera2906/Calculator-web/issues)
 
 ---

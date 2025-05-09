@@ -91,17 +91,22 @@ Built using the Web Audio API:
 ## 📁 Folder Structure
 
 ```
-calculator-app/
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   └── renderer.js
+Calculator/
 ├── assets/
+|   ├── screenshots/
+│   |   ├── screen-1.png
+│   |   ├── screen-2.png
+│   |   └── screen-3.png
 │   ├── bg.gif
 │   ├── catgif.gif
 │   ├── click.mp3
 │   └── demo.mp4
+├── css/
+│   └── style.css
+├── html/
+|   └── index.html
+├── js/
+│   └── renderer.js
 ```
 
 ---

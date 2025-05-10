@@ -1,12 +1,15 @@
+// Element references
 const screen = document.getElementById("screen");
 const buttonsContainer = document.getElementById("buttons");
 const historyPanel = document.getElementById("history");
 
+// State variables
 let current = "";
 let justEvaluated = false;
 let caretPos = 0;
 const history = [];
 
+// Button layout
 const buttonLayout = [
   '📝', '()', 'CE', 'C',
   '7', '8', '9', '÷',
@@ -15,37 +18,42 @@ const buttonLayout = [
   '0', '.', '=', '+'
 ];
 
-// Create buttons
+// Create calculator buttons
 buttonLayout.forEach(label => {
   const btn = document.createElement("button");
   btn.innerText = label;
   if (label === '📝') {
-    btn.onclick = () => toggleHistory();
+    btn.onclick = () => toggleHistory(); // Toggle history panel
   } else {
-    btn.onclick = () => handleInput(label);
+    btn.onclick = () => handleInput(label); // Handle calculator input
   }
   buttonsContainer.appendChild(btn);
 });
 
+// Sound effect setup
 const clickSound = new Audio('/assets/click.mp3');
 
 function playSound() {
   clickSound.currentTime = 0;
-  clickSound.play().catch(() => {});
+  clickSound.play().catch(() => {}); // Prevent error if sound can't play
 }
 
+
+// Update the calculator screen with caret position
 function updateScreen() {
   const before = escapeHtml(current.slice(0, caretPos));
   const after = escapeHtml(current.slice(caretPos));
   screen.innerHTML = before + '<span class="caret"></span>' + after;
 }
 
+// Escape HTML special characters for safety
 function escapeHtml(str) {
   return str.replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;");
 }
 
+// Handle input from buttons and keyboard
 function handleInput(label) {
   playSound();
 
@@ -84,6 +92,8 @@ function handleInput(label) {
   updateScreen();
 }
 
+
+// Insert character at caret position and handle context logic
 function insertAtCursor(char) {
   if (justEvaluated) {
     if (/[0-9.]/.test(char)) {
@@ -109,6 +119,8 @@ function insertAtCursor(char) {
   }
 }
 
+
+// Ensure valid expression by balancing parentheses
 function cleanExpression(expr) {
   let result = '';
   let balance = 0;
@@ -127,17 +139,15 @@ function cleanExpression(expr) {
     }
   }
 
-  return result + ')'.repeat(balance);
+  return result + ')'.repeat(balance); // Append missing closing parentheses
 }
 
+
+// Toggle history panel visibility and content
 function toggleHistory() {
-  // Toggle the visibility
-  const isHidden = historyPanel.classList.toggle('hidden');
+  const isHidden = historyPanel.classList.toggle('hidden'); // Toggle class
+  buttonsContainer.style.display = isHidden ? 'grid' : 'none';// Toggle button visibility
 
-  // Toggle button visibility
-  buttonsContainer.style.display = isHidden ? 'grid' : 'none';
-
-  // Update the history panel content if it's being shown
   if (!isHidden) {
     historyPanel.innerHTML = '';  // Clear previous history content
     const historyList = document.createElement('ul');
@@ -163,6 +173,8 @@ document.addEventListener('click', (e) => {
   }
 });
 
+
+// Set caret position based on click location on screen
 screen.addEventListener("click", (e) => {
   const rect = screen.getBoundingClientRect();
   const x = e.clientX - rect.left;
@@ -193,6 +205,8 @@ screen.addEventListener("click", (e) => {
   updateScreen();
 });
 
+
+// Keyboard input handling
 document.addEventListener("keydown", (e) => {
   if (e.key === "Delete"){
     e.preventDefault();
@@ -218,8 +232,9 @@ document.addEventListener("keydown", (e) => {
   } else {
     return;
   }
-
+  
   updateScreen();
 });
 
+// Initial screen update
 updateScreen();

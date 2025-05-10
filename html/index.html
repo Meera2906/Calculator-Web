@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <title>My Calculator</title>
-  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" /> <!-- Link to external CSS -->
 </head>
 <body>
-  <div class="calc-body">
-    <img src="/assets/catgif.gif" class="gif-icon" alt="fun gif" />
-    <div class="screen" id="screen" tabindex="0">
-      <button id="history-icon"></button>
-      <span id="screen-content">0</span>
+  <div class="calc-body"> <!-- Calculator container -->
+    <img src="/assets/catgif.gif" class="gif-icon" alt="fun gif" /> <!-- Decorative GIF icon -->
+    <div class="screen" id="screen" tabindex="0"> <!-- Calculator screen -->
+      <button id="history-icon"></button> <!-- History toggle button -->
+      <span id="screen-content">0</span> <!-- Initial screen value -->
     </div>
-    <div id="history" class="history-panel hidden"></div>
-    <div class="button-grid" id="buttons"></div>
+    <div id="history" class="history-panel hidden"></div> <!-- Hidden history panel -->
+    <div class="button-grid" id="buttons"></div> <!-- Buttons will be rendered here -->
   </div>
-  <script src="/js/renderer.js"></script>
+  <script src="/js/renderer.js"></script> <!-- JavaScript for rendering calculator -->
 </body>
 </html>

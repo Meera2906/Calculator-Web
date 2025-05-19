@@ -113,8 +113,16 @@ function insertAtCursor(char) {
       current = current.slice(0, caretPos) + '×' + char + current.slice(caretPos);
       caretPos += 2;
     } else {
-      current = current.slice(0, caretPos) + char + current.slice(caretPos);
-      caretPos += char.length;
+    const operators = ['+', '-', '×', '÷', '*', '/'];
+    const prevChar = current[caretPos - 1];
+
+    if (operators.includes(char) && operators.includes(prevChar)) {
+      // Replace the previous operator with the new one
+      current = current.slice(0, caretPos - 1) + char + current.slice(caretPos);
+      } else {
+        current = current.slice(0, caretPos) + char + current.slice(caretPos);
+        caretPos += char.length;
+      }
     }
   }
 }

@@ -119,6 +119,15 @@ function insertAtCursor(char) {
   }
 }
 
+const operators = ['+', '-', '×', '÷', '*', '/'];
+const prevChar = current[caretPos - 1];
+
+if (operators.includes(char) && operators.includes(prevChar)) {
+current = current.slice(0, caretPos - 1) + char + current.slice(caretPos);
+} else {
+current = current.slice(0, caretPos) + char + current.slice(caretPos);
+caretPos += char.length;
+}
 
 // Ensure valid expression by balancing parentheses
 function cleanExpression(expr) {
